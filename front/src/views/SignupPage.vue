@@ -6,7 +6,7 @@
             <input type="password" placeholder="Password" v-model="password_input">
             <input type="password" placeholder="Confirm password" v-model="confirm_password_input">
             <div v-html="error" class="error"></div>
-            <button @click="signUp">Sign up</button>
+            <button @click="signUp"> Sign up </button>
         </div>
     </div>
 </template>
@@ -25,11 +25,23 @@ import axios from 'axios'
         },
         methods: {
             signUp() {
+                console.log('IS CLICKED')
+                const RequestOption = {
+                    Username: this.username_input,
+                    Password: this.password_input,
+                    Headers: { 
+                        'Access-Control-Allow-Origin' : '*',
+                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization',
+                        'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                    },
+
+                }
+                axios.post('http://localhost:8081/auth/signup', RequestOption)
                 // TODO: add a post request to http://localhost:8081/auth/signup with all inputs in body
                 //       if an error occures, set this.error to the data of the response
                 //       else log the user with :
                 //                  - this.$store.dispatch('setUser', user.data.user);
-                //                  - this.$router.push({ name: 'Home' });
+                //                  - this.$router.push({ name: 'Home' })
             }
         },
     }
